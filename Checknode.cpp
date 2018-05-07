@@ -22,14 +22,18 @@ void Checknode::add_bitnode(Bitnode* n){
 }
 
 void Checknode::send_downward_messages(){
+	for(int i=0; i<bitnodes.size(); i++){
+		bitnodes.at(i)->accept_downward_message(calculate_downward_message(bitnodes.at(i)));
+	}
+}
+
+message Checknode::calculate_downward_message(Bitnode * dst){
 	message m;
 	m.one = .5;
 	m.zero = .5;
 	m.source = this;
 
-	for(int i=0; i<bitnodes.size(); i++){
-		bitnodes.at(i)->accept_downward_message(m);
-	}
+	return m;
 }
 
 void Checknode::accept_upward_message(message m){

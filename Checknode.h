@@ -18,6 +18,7 @@ class Bitnode;
 class Checknode {
 	std::vector<Bitnode*> bitnodes;
 	std::vector<message> messages;
+	message calculate_downward_message(Bitnode * dst);
 
 public:
 	Checknode();

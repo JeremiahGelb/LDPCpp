@@ -116,7 +116,7 @@ int main(){
 	checknode7.add_bitnode(&bitnode3);
 	checknode7.add_bitnode(&bitnode7);
 
-	int iterations = 3;
+	int iterations = 1;
 	for(int i = 0; i<iterations; i++){
 		for(int j = 0; j<bitnodes.size(); j++){
 			bitnodes.at(j)->send_upward_messages();
