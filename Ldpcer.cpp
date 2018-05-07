@@ -23,13 +23,13 @@ int main(){
 	//7,3,4 simplex
 
 	//making bitnodes
-	Bitnode bitnode1;
-	Bitnode bitnode2;
-	Bitnode bitnode3;
-	Bitnode bitnode4;
-	Bitnode bitnode5;
-	Bitnode bitnode6;
-	Bitnode bitnode7;
+	Bitnode bitnode1(1.2,1);
+	Bitnode bitnode2(2.1,1);
+	Bitnode bitnode3(1.8,1);
+	Bitnode bitnode4(-.4,1);
+	Bitnode bitnode5(-.1,1);
+	Bitnode bitnode6(-.5,1);
+	Bitnode bitnode7(-.1,1);
 
 	//adding bitnodes to list
 	bitnodes.push_back(&bitnode1);
@@ -116,16 +116,22 @@ int main(){
 	checknode7.add_bitnode(&bitnode3);
 	checknode7.add_bitnode(&bitnode7);
 
-	int iterations = 1;
+	int iterations = 10;
 	for(int i = 0; i<iterations; i++){
-		for(int j = 0; j<bitnodes.size(); j++){
-			bitnodes.at(j)->send_upward_messages();
-		}
 
 		for(int j = 0; j<checknodes.size(); j++){
 			checknodes.at(j)->send_downward_messages();
 		}
+
+		for(int j = 0; j<bitnodes.size(); j++){
+			bitnodes.at(j)->send_upward_messages();
+		}
 	}
+
+	std::cout <<"Final..." <<std::endl;
+	for(int j = 0; j<bitnodes.size(); j++){
+				bitnodes.at(j)->print_APP();
+			}
 
 	std::cout <<" made it to end" <<std::endl;
 

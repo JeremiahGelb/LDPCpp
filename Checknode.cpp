@@ -28,9 +28,19 @@ void Checknode::send_downward_messages(){
 }
 
 message Checknode::calculate_downward_message(Bitnode * dst){
+	double p_one = .5;
+
+	for(int i=0; i<messages.size(); i++){
+		if(messages.at(i).source != dst){
+			p_one = p_one*(2*messages.at(i).one - 1);
+		}
+	}
+
+	p_one = (.5) + (p_one);
+
 	message m;
-	m.one = .5;
-	m.zero = .5;
+	m.one = 1-p_one; // This doesn't make much sense, but it fixed the problem.
+	m.zero = p_one; // Perhaps double check 18notes 10 page 26
 	m.source = this;
 
 	return m;

@@ -8,9 +8,11 @@
 #include "Bitnode.h"
 #include "Checknode.h"
 
-Bitnode::Bitnode() {
-	// TODO Auto-generated constructor stub
-
+Bitnode::Bitnode(double y, double sigma) {
+	// Assuming channel sends (-1)^cj -> +1 for logic0, -1 for logic 1
+	// AWGN, BPSK, equally probable bits
+	p_of_one = 1 / (1 + exp((-2*-1*y)/(sigma*sigma)));
+	p_of_zero = 1-p_of_one;
 }
 
 Bitnode::~Bitnode() {
@@ -19,6 +21,12 @@ Bitnode::~Bitnode() {
 
 void Bitnode::add_checknode(Checknode* n){
 	checknodes.push_back(n);
+	message m;
+	m.one = p_of_one;
+	m.zero = p_of_zero;
+	m.source = this;
+
+	n->accept_upward_message(m);
 }
 
 void Bitnode::send_upward_messages(){
@@ -29,11 +37,43 @@ void Bitnode::send_upward_messages(){
 
 message Bitnode::calculate_upward_message(Checknode * dst){
 	message m;
-	m.one = .5;
-	m.zero = .5;
+	m.one = p_of_one;
+	m.zero = p_of_zero;
 	m.source = this;
 
+	for(int i=0; i<messages.size(); i++){
+		if(messages.at(i).source != dst){
+			m.one = m.one * (messages.at(i).one);
+			m.zero = m.zero * (messages.at(i).zero);
+		}
+	}
+
+	double sum = m.one + m.zero;
+
+	m.one = m.one/sum;
+	m.zero = m.zero/sum;
+
 	return m;
+}
+
+void Bitnode::print_APP(){
+	message m;
+	m.one = p_of_one;
+	m.zero = p_of_zero;
+	m.source = this;
+
+	for(int i=0; i<messages.size(); i++){
+			m.one = m.one * (messages.at(i).one);
+			m.zero = m.zero * (messages.at(i).zero);
+	}
+
+	double sum = m.one + m.zero;
+
+	m.one = m.one/sum;
+	m.zero = m.zero/sum;
+
+	std::cout << "p(0) = "<< m.zero << std::endl;
+
 }
 
 void Bitnode::accept_downward_message(message m){

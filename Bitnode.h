@@ -11,6 +11,7 @@
 #include <string>
 #include <iostream>
 #include "message.h"
+#include <math.h>       /* exp */
 
 class Checknode;
 
@@ -18,12 +19,15 @@ class Bitnode {
 	std::vector<Checknode*> checknodes;
 	std::vector<message> messages;
 	message calculate_upward_message(Checknode * dst);
+	double p_of_one;
+	double p_of_zero; // initial probabilities based on channel data;
 public:
-	Bitnode();
+	Bitnode(double y, double sigma);
 	virtual ~Bitnode();
 	void send_upward_messages();
 	void accept_downward_message(message m);
-	void add_checknode(Checknode* n);
+	void add_checknode(Checknode* n); // Also sends first message to checknode
+	void print_APP();
 
 };
 
