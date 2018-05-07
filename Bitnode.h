@@ -10,16 +10,18 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "message.h"
 
 class Checknode;
 
 class Bitnode {
 	std::vector<Checknode*> checknodes;
+	std::vector<message> messages;
 public:
 	Bitnode();
 	virtual ~Bitnode();
 	void send_upward_messages();
-	void accept_downward_message(int message);
+	void accept_downward_message(message m);
 	void add_checknode(Checknode* n);
 };
 

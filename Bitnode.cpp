@@ -22,12 +22,24 @@ void Bitnode::add_checknode(Checknode* n){
 }
 
 void Bitnode::send_upward_messages(){
+	message m;
+	m.one = .5;
+	m.zero = .5;
+	m.source = this;
 	for(int i=0; i<checknodes.size(); i++){
-		checknodes.at(i)->accept_upward_message(1);
+		checknodes.at(i)->accept_upward_message(m);
 	}
 }
 
-void Bitnode::accept_downward_message(int message){
-	std::cout << "I am a bitnode and I got a " << message << std::endl;
+void Bitnode::accept_downward_message(message m){
+	for(int i=0; i<messages.size(); i++){
+			if(messages.at(i).source == m.source){
+				messages.at(i) = m;
+				std::cout << "bitnode " << this << " updated "  << m.one << ";" << m.zero <<" from: " << m.source << std::endl;
+				return;
+			}
+		}
 
+	messages.push_back(m); // if there is no existing message from that source, add it to the vector.
+	std::cout << "bitnode " << this << " got "  << m.one << ";" << m.zero <<" from: " << m.source << std::endl;
 }

@@ -26,5 +26,10 @@ int main(){
 	bitnode.send_upward_messages();
 	checknode.send_downward_messages();
 
+	bitnode.send_upward_messages();
+	checknode.send_downward_messages();
+
+	std::cout <<" made it to end" <<std::endl;
+
 	return 0;
 }

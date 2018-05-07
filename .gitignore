@@ -10,8 +10,10 @@ ehthumbs.db
 #Java Nonsense
 *.class
 
-#c++ nonsense
+#cpp nonsense
 *.o
+
+*.exe*
 
 # Folder config file
 Desktop.ini
