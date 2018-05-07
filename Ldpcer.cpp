@@ -17,10 +17,15 @@ Ldpcer::~Ldpcer() {
 }
 
 int main(){
+	//Right now testing functionality in main -> eventually there should be a "instantiate hanning" function
+	// and a decode channel data function
 	std::vector<Checknode*> checknodes;
 	std::vector<Bitnode*> bitnodes;
 
 	//7,3,4 simplex
+	// Eventually hope to make this more modular - make bitnodes and checknodes based on parity check matrix
+	// Have this be a webapp -> send parity check matrix as a JSON?
+	// Decode multiple sets of channel data without remakng bit nodes and check nodes
 
 	//making bitnodes
 	Bitnode bitnode1(1.2,1);
@@ -116,20 +121,20 @@ int main(){
 	checknode7.add_bitnode(&bitnode3);
 	checknode7.add_bitnode(&bitnode7);
 
-	int iterations = 10;
+	int iterations = 10; // Should be parameter of function call with channel data
 	for(int i = 0; i<iterations; i++){
 
-		for(int j = 0; j<checknodes.size(); j++){
+		for(unsigned int j = 0; j<checknodes.size(); j++){
 			checknodes.at(j)->send_downward_messages();
 		}
 
-		for(int j = 0; j<bitnodes.size(); j++){
+		for(unsigned int j = 0; j<bitnodes.size(); j++){
 			bitnodes.at(j)->send_upward_messages();
 		}
 	}
 
 	std::cout <<"Final..." <<std::endl;
-	for(int j = 0; j<bitnodes.size(); j++){
+	for(unsigned int j = 0; j<bitnodes.size(); j++){
 				bitnodes.at(j)->print_APP();
 			}
 

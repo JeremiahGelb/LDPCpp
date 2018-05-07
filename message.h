@@ -12,7 +12,7 @@
 struct message{
 	double one;
 	double zero;
-	void *source;
+	void *source; // rename?
 };
 
 

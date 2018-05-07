@@ -11,6 +11,7 @@
 Bitnode::Bitnode(double y, double sigma) {
 	// Assuming channel sends (-1)^cj -> +1 for logic0, -1 for logic 1
 	// AWGN, BPSK, equally probable bits
+	// should probably make a "update_y,sigma" function
 	p_of_one = 1 / (1 + exp((-2*-1*y)/(sigma*sigma)));
 	p_of_zero = 1-p_of_one;
 }
@@ -21,12 +22,13 @@ Bitnode::~Bitnode() {
 
 void Bitnode::add_checknode(Checknode* n){
 	checknodes.push_back(n);
+
 	message m;
 	m.one = p_of_one;
 	m.zero = p_of_zero;
 	m.source = this;
 
-	n->accept_upward_message(m);
+	n->accept_upward_message(m); // This functionality should be moved to "send_initial_probabilities()"
 }
 
 void Bitnode::send_upward_messages(){
@@ -41,6 +43,7 @@ message Bitnode::calculate_upward_message(Checknode * dst){
 	m.zero = p_of_zero;
 	m.source = this;
 
+	// Perhaps optimize here by multiplying all then dividing out unwanted
 	for(int i=0; i<messages.size(); i++){
 		if(messages.at(i).source != dst){
 			m.one = m.one * (messages.at(i).one);
@@ -62,7 +65,7 @@ void Bitnode::print_APP(){
 	m.zero = p_of_zero;
 	m.source = this;
 
-	for(int i=0; i<messages.size(); i++){
+	for(unsigned int i=0; i<messages.size(); i++){
 			m.one = m.one * (messages.at(i).one);
 			m.zero = m.zero * (messages.at(i).zero);
 	}
@@ -77,7 +80,7 @@ void Bitnode::print_APP(){
 }
 
 void Bitnode::accept_downward_message(message m){
-	for(int i=0; i<messages.size(); i++){
+	for(unsigned int i=0; i<messages.size(); i++){
 			if(messages.at(i).source == m.source){
 				messages.at(i) = m;
 				std::cout << "bitnode " << this << " updated "  << m.one << ";" << m.zero <<" from: " << m.source << std::endl;

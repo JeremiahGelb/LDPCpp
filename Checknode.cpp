@@ -22,15 +22,16 @@ void Checknode::add_bitnode(Bitnode* n){
 }
 
 void Checknode::send_downward_messages(){
-	for(int i=0; i<bitnodes.size(); i++){
+	for(unsigned int i=0; i<bitnodes.size(); i++){
 		bitnodes.at(i)->accept_downward_message(calculate_downward_message(bitnodes.at(i)));
 	}
 }
 
-message Checknode::calculate_downward_message(Bitnode * dst){
+message Checknode::calculate_downward_message(Bitnode * dst){\
+	// Room for optimization here - multiply all the (2q-1) then divide out the unwanted one?
 	double p_one = .5;
 
-	for(int i=0; i<messages.size(); i++){
+	for(unsigned int i=0; i<messages.size(); i++){
 		if(messages.at(i).source != dst){
 			p_one = p_one*(2*messages.at(i).one - 1);
 		}
@@ -47,7 +48,7 @@ message Checknode::calculate_downward_message(Bitnode * dst){
 }
 
 void Checknode::accept_upward_message(message m){
-	for(int i=0; i<messages.size(); i++){
+	for(unsigned int i=0; i<messages.size(); i++){
 			if(messages.at(i).source == m.source){
 				messages.at(i) = m;
 				std::cout << "checknode " << this << " updated "  << m.one << ";" << m.zero <<" from: " << m.source << std::endl;

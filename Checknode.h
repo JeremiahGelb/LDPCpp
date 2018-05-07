@@ -14,6 +14,8 @@
 
 
 class Bitnode;
+// TODO Bitnode and Checknode should both inherit from parent Node class
+// too much common functionality to have them be completely unique classes
 
 class Checknode {
 	std::vector<Bitnode*> bitnodes;
