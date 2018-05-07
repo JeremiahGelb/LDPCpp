@@ -12,7 +12,7 @@ ehthumbs.db
 
 #cpp nonsense
 *.o
-
+*.cproject
 *.exe*
 
 # Folder config file
