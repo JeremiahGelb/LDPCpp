@@ -99,7 +99,7 @@ int main(){
 	ldpcer.make_nodes(h_matrix);
 
 	double sigma  = 1;
-	int iterations = 1;
+	int iterations = 30;
 	std::vector<double> channel_values;
 
 	// the channel_values are a vector of doubles
@@ -113,9 +113,28 @@ int main(){
 
 	std::vector<int> max_likelihood_codeword =  ldpcer.find_max_likelihood_codeword(channel_values, sigma, iterations);
 
+	std::cout << "Decoding channel data [1.2, 2.1, 1.8, -.4, -.1, -.5, -.1]" << std::endl;
 	for(unsigned int i =0; i<max_likelihood_codeword.size(); i++){
 		std::cout << "bit: " <<i << " = " << max_likelihood_codeword.at(i) << std::endl;
 	}
+	std::cout << std::endl;
+
+	channel_values.clear();
+	channel_values.push_back(0);
+	channel_values.push_back(0);
+	channel_values.push_back(0);
+	channel_values.push_back(0);
+	channel_values.push_back(-100);
+	channel_values.push_back(100);
+	channel_values.push_back(-100);
+
+	max_likelihood_codeword =  ldpcer.find_max_likelihood_codeword(channel_values, sigma, iterations);
+
+	std::cout << "Systematically encoding channel data u = 101" << std::endl;
+	for(unsigned int i =0; i<max_likelihood_codeword.size(); i++){
+		std::cout << "bit: " <<i << " = " << max_likelihood_codeword.at(i) << std::endl;
+	}
+	std::cout << std::endl;
 
 	return 0;
 }
