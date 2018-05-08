@@ -225,7 +225,7 @@ int main(){
 
 	*/
 
-	std::cout <<" made it to end" <<std::endl;
+	std::cout <<"made it to end of main" <<std::endl;
 
 	return 0;
 }
