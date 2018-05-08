@@ -11,6 +11,17 @@
 Bitnode::Bitnode(double y, double sigma) {
 	// Assuming channel sends (-1)^cj -> +1 for logic0, -1 for logic 1
 	// AWGN, BPSK, equally probable bits
+	p_of_one = 1 / (1 + exp((-2*-1*y)/(sigma*sigma)));
+	p_of_zero = 1-p_of_one;
+}
+
+Bitnode::Bitnode(){
+
+}
+
+void Bitnode::update_channel_data(double y, double sigma){
+	// Assuming channel sends (-1)^cj -> +1 for logic0, -1 for logic 1
+	// AWGN, BPSK, equally probable bits
 	// should probably make a "update_y,sigma" function
 	p_of_one = 1 / (1 + exp((-2*-1*y)/(sigma*sigma)));
 	p_of_zero = 1-p_of_one;
@@ -22,13 +33,17 @@ Bitnode::~Bitnode() {
 
 void Bitnode::add_checknode(Checknode* n){
 	checknodes.push_back(n);
+}
 
+void Bitnode::send_initial_probabilities(){
 	message m;
 	m.one = p_of_one;
 	m.zero = p_of_zero;
 	m.source = this;
 
-	n->accept_upward_message(m); // This functionality should be moved to "send_initial_probabilities()"
+	for(int i=0; i<checknodes.size(); i++){
+		checknodes.at(i)->accept_upward_message(m);
+	}
 }
 
 void Bitnode::send_upward_messages(){

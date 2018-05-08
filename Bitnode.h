@@ -25,6 +25,9 @@ class Bitnode {
 	double p_of_zero; // initial probabilities based on channel data;
 public:
 	Bitnode(double y, double sigma);
+	Bitnode();
+	void update_channel_data(double y, double sigma);
+	void send_initial_probabilities();
 	virtual ~Bitnode();
 	void send_upward_messages();
 	void accept_downward_message(message m);

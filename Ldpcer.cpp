@@ -121,7 +121,11 @@ int main(){
 	checknode7.add_bitnode(&bitnode3);
 	checknode7.add_bitnode(&bitnode7);
 
-	int iterations = 10; // Should be parameter of function call with channel data
+	for(unsigned int j = 0; j<checknodes.size(); j++){
+		bitnodes.at(j)->send_initial_probabilities();
+	}
+
+	int iterations = 1; // Should be parameter of function call with channel data
 	for(int i = 0; i<iterations; i++){
 
 		for(unsigned int j = 0; j<checknodes.size(); j++){
@@ -138,7 +142,7 @@ int main(){
 				bitnodes.at(j)->print_APP();
 			}
 
-	std::cout <<" made it to end" <<std::endl;
+	//std::cout <<" made it to end" <<std::endl;
 
 	return 0;
 }
