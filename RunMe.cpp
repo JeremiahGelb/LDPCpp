@@ -17,6 +17,87 @@ RunMe::~RunMe() {
 }
 
 int main(){
+	//debugging stuff for ldpcer.cpp
+	std::vector< std::vector<int> > h_matrix; // Think of this as row of columns
+	std::vector<int> column0;
+	std::vector<int> column1;
+	std::vector<int> column2;
+	std::vector<int> column3;
+	std::vector<int> column4;
+	std::vector<int> column5;
+	std::vector<int> column6;
+
+	h_matrix.push_back(column0);
+	h_matrix.push_back(column1);
+	h_matrix.push_back(column2);
+	h_matrix.push_back(column3);
+	h_matrix.push_back(column4);
+	h_matrix.push_back(column5);
+	h_matrix.push_back(column6);
+
+	// first column
+	h_matrix.at(0).push_back(1);
+	h_matrix.at(0).push_back(0);
+	h_matrix.at(0).push_back(0);
+	h_matrix.at(0).push_back(0);
+	h_matrix.at(0).push_back(1);
+	h_matrix.at(0).push_back(0);
+	h_matrix.at(0).push_back(1);
+
+	//second column
+	h_matrix.at(1).push_back(1);
+	h_matrix.at(1).push_back(1);
+	h_matrix.at(1).push_back(0);
+	h_matrix.at(1).push_back(0);
+	h_matrix.at(1).push_back(0);
+	h_matrix.at(1).push_back(1);
+	h_matrix.at(1).push_back(0);
+
+	h_matrix.at(2).push_back(0);
+	h_matrix.at(2).push_back(1);
+	h_matrix.at(2).push_back(1);
+	h_matrix.at(2).push_back(0);
+	h_matrix.at(2).push_back(0);
+	h_matrix.at(2).push_back(0);
+	h_matrix.at(2).push_back(1);
+
+	h_matrix.at(3).push_back(1);
+	h_matrix.at(3).push_back(0);
+	h_matrix.at(3).push_back(1);
+	h_matrix.at(3).push_back(1);
+	h_matrix.at(3).push_back(0);
+	h_matrix.at(3).push_back(0);
+	h_matrix.at(3).push_back(0);
+
+	h_matrix.at(4).push_back(0);
+	h_matrix.at(4).push_back(1);
+	h_matrix.at(4).push_back(0);
+	h_matrix.at(4).push_back(1);
+	h_matrix.at(4).push_back(1);
+	h_matrix.at(4).push_back(0);
+	h_matrix.at(4).push_back(0);
+
+	h_matrix.at(5).push_back(0);
+	h_matrix.at(5).push_back(0);
+	h_matrix.at(5).push_back(1);
+	h_matrix.at(5).push_back(0);
+	h_matrix.at(5).push_back(1);
+	h_matrix.at(5).push_back(1);
+	h_matrix.at(5).push_back(0);
+
+	h_matrix.at(6).push_back(0);
+	h_matrix.at(6).push_back(0);
+	h_matrix.at(6).push_back(0);
+	h_matrix.at(6).push_back(1);
+	h_matrix.at(6).push_back(0);
+	h_matrix.at(6).push_back(1);
+	h_matrix.at(6).push_back(1);
+
+	Ldpcer ldpcer;
+	ldpcer.make_nodes(h_matrix);
+
+	/*
+
 	//Right now testing functionality in main -> eventually there should be a "instantiate hanning" function
 	// and a decode channel data function
 	std::vector<Checknode*> checknodes;
@@ -142,7 +223,9 @@ int main(){
 				bitnodes.at(j)->print_APP();
 			}
 
-	//std::cout <<" made it to end" <<std::endl;
+	*/
+
+	std::cout <<" made it to end" <<std::endl;
 
 	return 0;
 }

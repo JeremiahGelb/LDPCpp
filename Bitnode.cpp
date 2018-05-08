@@ -41,13 +41,13 @@ void Bitnode::send_initial_probabilities(){
 	m.zero = p_of_zero;
 	m.source = this;
 
-	for(int i=0; i<checknodes.size(); i++){
+	for(unsigned int i=0; i<checknodes.size(); i++){
 		checknodes.at(i)->accept_upward_message(m);
 	}
 }
 
 void Bitnode::send_upward_messages(){
-	for(int i=0; i<checknodes.size(); i++){
+	for(unsigned int i=0; i<checknodes.size(); i++){
 		checknodes.at(i)->accept_upward_message(calculate_upward_message(checknodes.at(i)));
 	}
 }
@@ -59,7 +59,7 @@ message Bitnode::calculate_upward_message(Checknode * dst){
 	m.source = this;
 
 	// Perhaps optimize here by multiplying all then dividing out unwanted
-	for(int i=0; i<messages.size(); i++){
+	for(unsigned int i=0; i<messages.size(); i++){
 		if(messages.at(i).source != dst){
 			m.one = m.one * (messages.at(i).one);
 			m.zero = m.zero * (messages.at(i).zero);

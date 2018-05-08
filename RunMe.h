@@ -10,6 +10,7 @@
 
 #include "Bitnode.h"
 #include "Checknode.h"
+#include "Ldpcer.h"
 
 class RunMe {
 public:
