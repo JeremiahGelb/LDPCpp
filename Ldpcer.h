@@ -18,7 +18,7 @@ public:
 	virtual ~Ldpcer();
 	void make_nodes(std::vector< std::vector<int> > h_matrix);
 	void delete_nodes();
-	void decode_channel_data(std::vector<double> channel_values, double sigma, int interations);
+	std::vector<int> find_max_likelihood_codeword(std::vector<double> channel_values, double sigma, int iterations);
 
 };
 

@@ -51,11 +51,11 @@ void Checknode::accept_upward_message(message m){
 	for(unsigned int i=0; i<messages.size(); i++){
 			if(messages.at(i).source == m.source){
 				messages.at(i) = m;
-				std::cout << "checknode " << this << " updated "  << m.one << ";" << m.zero <<" from: " << m.source << std::endl;
+				//std::cout << "checknode " << this << " updated "  << m.one << ";" << m.zero <<" from: " << m.source << std::endl;
 				return;
 			}
 		}
 
 	messages.push_back(m); // if there is no existing message from that source, add it to the vector.
-	std::cout << "checknode " << this << " got "  << m.one << ";" << m.zero <<" from: " << m.source << std::endl;
+	//std::cout << "checknode " << this << " got "  << m.one << ";" << m.zero <<" from: " << m.source << std::endl;
 }

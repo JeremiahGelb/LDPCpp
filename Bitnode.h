@@ -28,10 +28,11 @@ public:
 	Bitnode();
 	void update_channel_data(double y, double sigma);
 	void send_initial_probabilities();
+	int return_best_guess();
 	virtual ~Bitnode();
 	void send_upward_messages();
 	void accept_downward_message(message m);
-	void add_checknode(Checknode* n); // Also sends first message to checknode
+	void add_checknode(Checknode* n);
 	void print_APP();
 
 };
