@@ -1,10 +1,10 @@
 CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
 
-OBJS =		Ldpcer.o Bitnode.o Checknode.o
+OBJS =		RunMe.o Ldpcer.o Bitnode.o Checknode.o
 
 LIBS =
 
-TARGET =	Ldcper.exe
+TARGET =	RunMe.exe
 
 $(TARGET):	$(OBJS)
 	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
