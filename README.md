@@ -1,7 +1,5 @@
 # LDPCpp
-MOST RECENT FULLY FUNCTIONAL COMMMIT:
-
-"Move more functionality to ldpc.cpp" - look at RunMe.cpp for example use
+look at RunMe.cpp for example use
 
 This is a little project I did for fun after taking a class on error control coding.
 
