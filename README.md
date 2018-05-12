@@ -1,12 +1,7 @@
 # LDPCpp
-look at RunMe.cpp for example use
+look at RunMe.cpp demo() for example use of Ldpcer
 
-This is a little project I did for fun after taking a class on error control coding.
+C++ error control coding stuff: Jeremiah Gelb
+Front end and web integration: Zachery Thomas
 
-Couldn't have done this without great instruction and ppt slides from Dr. Brian Hughes :)
-
-I did this project to understand belief propogation a little better, and to teach myself c++.
-
-This is my first c++ project and also first time implementing belief propogation, so feel free to contact me with any comments or suggestions.
-
-I will probably add more features and documentation soon.
+More documentation soon :)
