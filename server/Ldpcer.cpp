@@ -19,6 +19,8 @@ Ldpcer::~Ldpcer() {
 void Ldpcer::make_nodes(std::vector< std::vector<int> > h_matrix){
 	delete_nodes(); // delete old nodes before making new ones.
 
+	// TODO add some error checking here
+	// TODO Perhaps we should reject all all zero rows or columns
 	unsigned int number_of_bitnodes = h_matrix.size(); // number of columns
 	unsigned int number_of_checknodes = h_matrix.at(0).size(); // number of rows (this could break on empty matrix)?
 	//std::cout << "bitnodes: "<< number_of_bitnodes << " checknodes: "<< number_of_checknodes << std::endl;
@@ -36,7 +38,6 @@ void Ldpcer::make_nodes(std::vector< std::vector<int> > h_matrix){
 	for(unsigned int i = 0; i<number_of_checknodes; i++){
 		for(unsigned int j = 0; j<number_of_bitnodes; j++){
 			if(h_matrix.at(j).at(i)){ // if that spot in the matrix is a one
-
 				checknodes.at(i)->add_bitnode(bitnodes.at(j));//introduce the nodes to each other
 				bitnodes.at(j)->add_checknode(checknodes.at(i));
 			}
@@ -47,7 +48,7 @@ void Ldpcer::make_nodes(std::vector< std::vector<int> > h_matrix){
 }
 
 std::vector<int> Ldpcer::find_max_likelihood_codeword(std::vector<double> channel_values, double sigma, int iterations){
-	// Check channel value length is same as bitnodes?
+	// TODO Check channel value length is same as bitnodes?
 
 	for(unsigned int i =0; i< channel_values.size(); i++){
 		// give all the bitnodes their channel data

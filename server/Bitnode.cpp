@@ -24,7 +24,8 @@ Bitnode::Bitnode(){
 void Bitnode::update_channel_data(double y, double sigma){
 	// Assuming channel sends (-1)^cj -> +1 for logic0, -1 for logic 1
 	// AWGN, BPSK, equally probable bits
-	// should probably make a "update_y,sigma" function
+	// Make this more modular?
+	// TODO do error checking this would break on sigma = 0.
 	p_of_one = 1 / (1 + exp((-2*-1*y)/(sigma*sigma)));
 	p_of_zero = 1-p_of_one;
 }
@@ -124,7 +125,8 @@ int Bitnode::return_best_guess(){
 
 void Bitnode::accept_downward_message(message m){
 	// A checknode will call this function to send a downward message.
-	// Make it so that only a checknode can call this???
+	// TODO Make it so that only a checknode can call this???
+
 
 	for(unsigned int i=0; i<messages.size(); i++){
 			if(messages.at(i).source == m.source){

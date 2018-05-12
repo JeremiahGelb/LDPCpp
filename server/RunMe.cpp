@@ -24,7 +24,9 @@ int main(int argc, char ** filenames){
 	int columns;
 
 	request.open(filenames[2]);
+
 	if(request.is_open()){
+		// TODO add some error checking here (this whole block assumes perfectly formatted input)
 		request >> rows;
 		std::cout << "rows: " << rows << std::endl;
 
@@ -61,14 +63,18 @@ int main(int argc, char ** filenames){
 		request >> iterations;
 
 		Ldpcer ldpcer;
-		ldpcer.make_nodes(h_matrix);
-		std::vector<int> max_likelihood_codeword =  ldpcer.find_max_likelihood_codeword(channel_values, sigma, iterations);
 
+		// TODO the next two functions should throw errors if bad input - handle by writing it to response (wrap in a try catch)
+		ldpcer.make_nodes(h_matrix);
+
+		std::vector<int> max_likelihood_codeword =  ldpcer.find_max_likelihood_codeword(channel_values, sigma, iterations);
 		for(unsigned int i =0; i<max_likelihood_codeword.size(); i++){
 				std::cout << "bit: " <<i << " = " << max_likelihood_codeword.at(i) << std::endl;
 		}
 
 		response.open(filenames[3]);
+		// TODO add some error checking here
+		response << "200\n";
 		for(unsigned int i =0; i<max_likelihood_codeword.size(); i++){
 			response << max_likelihood_codeword.at(i);
 			response << "\n";
@@ -78,6 +84,7 @@ int main(int argc, char ** filenames){
 
 	}else{
 		response.open(filenames[3]);
+		// TODO add some error checking here
 		response << "500\n";
 		response << "Failed to open request file";
 		response.close();

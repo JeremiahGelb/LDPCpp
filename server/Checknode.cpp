@@ -48,6 +48,7 @@ message Checknode::calculate_downward_message(Bitnode * dst){\
 }
 
 void Checknode::accept_upward_message(message m){
+	// TODO Make it so that only a bitnode can call this???
 	for(unsigned int i=0; i<messages.size(); i++){
 			if(messages.at(i).source == m.source){
 				messages.at(i) = m;
