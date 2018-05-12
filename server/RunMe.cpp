@@ -68,7 +68,7 @@ int main(int argc, char ** filenames){
 				std::cout << "bit: " <<i << " = " << max_likelihood_codeword.at(i) << std::endl;
 		}
 
-		response.open("ldpcer_response.txt");
+		response.open(filenames[3]);
 		for(unsigned int i =0; i<max_likelihood_codeword.size(); i++){
 			response << max_likelihood_codeword.at(i);
 			response << "\n";
@@ -77,7 +77,7 @@ int main(int argc, char ** filenames){
 
 
 	}else{
-		response.open("ldpcer_response.txt");
+		response.open(filenames[3]);
 		response << "500\n";
 		response << "Failed to open request file";
 		response.close();
