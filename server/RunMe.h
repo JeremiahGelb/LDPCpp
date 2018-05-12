@@ -11,6 +11,8 @@
 #include "Bitnode.h"
 #include "Checknode.h"
 #include "Ldpcer.h"
+#include <fstream>
+#include <iostream>
 
 class RunMe {
 public:

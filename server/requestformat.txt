@@ -1,0 +1,12 @@
+Matrix Rows(int)
+Matrix Columns(int)
+Matrix[0,0]	(int)	#row 0 column 0
+Matrix[0,1]			#row 0 column 1
+...
+Matrix[1,0] 		#Row 1 column 0
+...
+ChannelValues[0] (double) #There should be the same number of channel values as columns in the matrix
+ChannelValues[1]
+...
+Sigma (double) #this is the std::deviation of the channel
+Iterations (int) #this is the number of iterations of the SPA to run

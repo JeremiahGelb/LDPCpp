@@ -16,7 +16,80 @@ RunMe::~RunMe() {
 	// TODO Auto-generated destructor stub
 }
 
-int main(){
+int main(int argc, char ** filenames){
+	std::ifstream request;
+	std::ofstream response;
+	std::vector< std::vector<int> > h_matrix;
+	int rows;
+	int columns;
+
+	request.open(filenames[2]);
+	if(request.is_open()){
+		request >> rows;
+		std::cout << "rows: " << rows << std::endl;
+
+		request >> columns;
+		std::cout << "columns: " << columns << std::endl;
+
+		for(int i = 0; i<columns; i++){
+			std::vector<int> column_i;
+			h_matrix.push_back(column_i);
+		}
+
+		int current_val;
+
+		for(int i = 0; i<rows; i++){
+			for(int k =0; k<columns; k++){
+				request >> current_val;
+				h_matrix.at(k).push_back(current_val);
+			}
+		}
+
+		std::vector<double> channel_values;
+		double channel_val;
+
+		for(int k =0; k<columns; k++){
+			request >> channel_val;
+			channel_values.push_back(channel_val);
+		}
+
+		double sigma;
+		request >> sigma;
+
+		int iterations;
+
+		request >> iterations;
+
+		Ldpcer ldpcer;
+		ldpcer.make_nodes(h_matrix);
+		std::vector<int> max_likelihood_codeword =  ldpcer.find_max_likelihood_codeword(channel_values, sigma, iterations);
+
+		for(unsigned int i =0; i<max_likelihood_codeword.size(); i++){
+				std::cout << "bit: " <<i << " = " << max_likelihood_codeword.at(i) << std::endl;
+		}
+
+		response.open("ldpcer_response.txt");
+		for(unsigned int i =0; i<max_likelihood_codeword.size(); i++){
+			response << max_likelihood_codeword.at(i);
+			response << "\n";
+		}
+		response.close();
+
+
+	}else{
+		response.open("ldpcer_response.txt");
+		response << "500\n";
+		response << "Failed to open request file";
+		response.close();
+	}
+
+	request.close();
+
+
+	return 0;
+}
+
+void demo(){
 	// Making parity check matrix
 	std::vector< std::vector<int> > h_matrix; // Think of this as row of columns
 	std::vector<int> column0;
@@ -136,5 +209,4 @@ int main(){
 	}
 	std::cout << std::endl;
 
-	return 0;
 }
