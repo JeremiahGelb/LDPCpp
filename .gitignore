@@ -1,3 +1,9 @@
+# Node stuff
+node_modules
+
+# Vagrant stuff
+.vagrant
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
