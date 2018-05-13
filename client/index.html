@@ -1,11 +1,25 @@
 <html>
+
 <head>
     <title>LDPCpp!</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./js/socket_handler.js"></script>
 </head>
+
 <body>
-    Nothing to see here!
+    <table>
+        <tr>
+            <td>
+                <textarea id='request' autofocus='true'>
+    </textarea>
+            </td>
+            <td>
+                <textarea id='response' readonly='false'>
+        </textarea>
+            </td>
+        </tr>
+    </table>
+    <button id='sendButton'>Send!</buttons>
 </body>
 </html>

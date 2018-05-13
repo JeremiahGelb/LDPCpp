@@ -6,6 +6,7 @@ var uniqueFilename = require('unique-filename');
 var path = require('path');
 var os = require('os');
 var fs = require('fs');
+var cp = require('child_process');
 
 CLIENT_FILES_DIR = path.resolve(__dirname + '/../client/')
 PORT = 80
@@ -18,11 +19,12 @@ app.get('/', function (req, res) {
 });
 
 
-function createTmpFile(text) {
+function createTmpFiles(text) {
     var randomTmpfile = uniqueFilename(os.tmpdir(), 'LDPCpp');
 
     try {
-        fs.writeFileSync(randomTmpfile, text);
+        fs.writeFileSync(randomTmpfile + '-request', text);
+        fs.writeFileSync(randomTmpfile + '-response', '');
         console.log('Created: ' + randomTmpfile)
         return randomTmpfile
     } catch (err) {
@@ -31,9 +33,22 @@ function createTmpFile(text) {
     }
 }
 
-function deleteTmpFile(fname) {
+function getTmpFileData(fname) {
+    var content = ''
     try {
-        fs.unlinkSync(fname);
+        content = fs.readFileSync(fname + '-response')
+        console.log('Read from: ' + content)
+        return content
+    } catch (err) {
+        console.log(err)
+        return null
+    }
+}
+
+function deleteTmpFiles(fname) {
+    try {
+        fs.unlinkSync(fname + '-request');
+        fs.unlinkSync(fname + '-response');
         console.log('Deleted: ' + fname)
         return true
     } catch (err) {
@@ -46,19 +61,26 @@ io.on('connection', function (socket) {
     console.log('user connected');
 
     socket.on('data', function (msg) {
-        // save msg to tmp file
-        fname = createTmpFile('TEXT!')
+        try {
+            // save msg to tmp file
+            fname = createTmpFiles(msg)
 
-        // call .exe
+            // call .exe
+            cp.execSync('./RunMe.exe 2 ' + fname + '-request ' + fname + '-response')
 
-        // get output of .exe (as file or std out)
+            // get output of tmp response file
+            content = getTmpFileData(fname)
 
-        // emit output to client
+            // emit content to client
+            socket.emit('data', String(content));
 
-        socket.emit('data', 'pong: ' + msg);
+        } catch (err) {
+            console.log(err)
+            socket.emit('data', String(err));
+        }
 
-        // remove tmp file
-        deleteTmpFile(fname)
+        // remove tmp files
+        deleteTmpFiles(fname)
     });
 
 });

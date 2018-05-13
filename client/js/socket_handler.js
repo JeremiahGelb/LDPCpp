@@ -1,9 +1,18 @@
 $(document).ready(function() {
     var socket = io()
 
-    socket.emit('data', 'TEST!')
+    function send_data(data){
+        socket.emit('data', data)
+    }
 
-    socket.on('data', function(msg){
+    $('#sendButton').click(function(){
+        data = $('#request').val()
+        send_data(data)
+    });
+
+
+    socket.on('data', function(msg){     
         console.log(msg)
+        $('#response').val(msg)
     });
 });
