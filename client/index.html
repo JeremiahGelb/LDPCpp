@@ -13,28 +13,78 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./js/socket_handler.js"></script>
+    <script src="./js/dim_handler.js"></script>
     <link rel="stylesheet" href="./css/style.css"></link>
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
+    <div class="alert alert-danger" role="alert">ERROR!</div>
+    <div class="container border rounded">
+        <div class="row border-between">
             <div class="col-md">
-                <span>Put some data here:</span>
-                <br>
-                <textarea id='request' autofocus='true'></textarea>
+                <h4>Parity Check Matrix</h4>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col-4 text-right">Dimensions:
+                    </div>
+                    <input type="text" class="form-control dim col-2" id="xdim">
+                    <div class="col-1 text-center">x
+                    </div>
+                    <input type="text" class="form-control dim col-2" id="ydim">
+                    <div class="col"></div>
+                </div>
+                <div id="parityTable" class="parityTable">
+                </div>
+                <div class="row" id='presets'>
+                    <div class="col text-center">Or use one of the presets here:
+                    </div>
+                    <div class="dropdown col">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                              Dropdown button
+                            </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-md">
-                <span>Get some data here:</span>
-                <br>
-                <textarea id='response' readonly='false'></textarea>
+                <div class="row">
+                    <div class="col"></div>
+                    <p class="col-10 font-weight-bold">
+                        This section decodes the received sequence assuming channel where logic-0 is encoded as a +1 and logical-1 is encoded as
+                        a -1, and then sent through a channel that adds 0-mean gaussian noise with sigma 1
+                    </p>
+                    <div class="col"></div>
+                </div>
+                <div class="row" id="recSeq">
+                    <p class="col-4 text-right">Received Sequence:
+                    </p>
+                </div>
+                <div class="row" id="logValDec">
+                    <p class="col-4 text-right">Logic Values <br> (with decoding):
+                    </p>
+                </div>
+                <div class="row" id="logValNDec">
+                    <p class="col-4 text-right">Logic Values <br> (no decoding):
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right">Iterations:
+                    </div>
+                    <input type="text" class="form-control dim col" id="">
+                    <div class="col-6"></div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                    <button type="button" class="btn btn-primary" id="decodeButton">Decode!</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    </div>
-    <br>
-    <center>
-        <button id='sendButton'>Send!</buttons>
-    </center>
 </body>
 </html>

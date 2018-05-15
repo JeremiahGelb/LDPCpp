@@ -2,7 +2,50 @@ body {
     padding: 15px;
 }
 
-textarea {
-    width: 90%;
-    height: 200px;
+.border {
+    border-color: #e3e3e3!important;
 }
+
+.container {
+    padding: 20px;
+}
+
+div.alert {
+    visibility: hidden;
+}
+
+.parityTable {
+    margin: 40px 10px 10px 10px;
+}
+
+.row {
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+
+.form-control {
+    margin: 5px 5px 5px 5px;
+}
+
+#presets {
+    margin-top: 40px;
+}
+
+
+/* 
+Next code from:
+https://stackoverflow.com/questions/11815081/how-can-i-add-a-line-between-two-columns-using-twitter-bootstraps-grid-system?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+*/
+.border-between > [class*='col-']:before {
+    background: #e3e3e3;
+    bottom: 0;
+    content: " ";
+    left: 0;
+    position: absolute;
+    width: 1px;
+    top: 0;
+ }
+ 
+ .border-between > [class*='col-']:first-child:before {
+    display: none;
+ }

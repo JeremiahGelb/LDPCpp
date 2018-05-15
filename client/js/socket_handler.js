@@ -1,27 +1,36 @@
 $(document).ready(function() {
     var socket = io()
 
-    function send_data(data){
+    function sendData(data){
         socket.emit('data', data)
     }
 
-    function display_data(data){
+    function setError(msg){
+        $('.alert').css('visibility', 'visible').text(msg)
+    }
+
+    function clearError(){
+        $('.alert').css('visibility', 'hidden')
+    }
+
+    function handleData(data){
         if (data.startsWith('200')){
             data = data.replace('200','');
             $('#response').val(data)
+            clearError()
         } else {
-            $('#response').val('Error?\n' + data)
+            setError(data)
         }
     }
 
-    $('#sendButton').click(function(){
+    $('#decodeButton').click(function(){
         data = $('#request').val()
-        send_data(data)
+        sendData(data)
     });
 
 
     socket.on('data', function(msg){     
         console.log(msg)
-        display_data(msg)
+        handleData(msg)
     });
 });
