@@ -29,7 +29,9 @@ $(document).ready(function () {
             cells += '<div class="form-group row">'
             for (x = 0; x < xdim; x++) {
                 id = 'pmat' + y + 'x' + x
-                cell = '<input type="text" class="form-control col cell parity" value="' + checkVal(id) + '" id="' + id + '">'
+                cell = '<input type="text" class="form-control col cell parity" \
+                        value="' + checkVal(id) + '" \
+                        id="' + id + '">'
                 cells += cell
             }
             cells += '</div>'
@@ -45,7 +47,12 @@ $(document).ready(function () {
             for (x = 0; x < xdim; x++) {
                 id = divID + x
                 cl = divID
-                cell = '<input type="text" class="form-control col cell ' + cl + '" value="' + checkVal(id) + '" id="' + id + '">'
+                setReadonly = function(){ if (divID != "recSeq") return "readonly" }
+                cell = '<input type="text" \
+                        class="form-control col cell ' + cl + '" \
+                        value="' + checkVal(id) + '" \
+                        id="' + id + '"' +
+                        setReadonly() + '>'
                 cells += cell
             }
             div.find('input').remove()

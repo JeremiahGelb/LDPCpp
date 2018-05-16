@@ -22,7 +22,7 @@ $(document).ready(function() {
             var dataList = data.split('\n')
 
             var id = 'logValDec'
-            if ( $('#iterations').val() == 1 ){
+            if ( $('#iterations').val() == 0 ){
                 id = 'logValNDec'
             }
 
