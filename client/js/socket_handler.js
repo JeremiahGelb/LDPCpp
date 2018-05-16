@@ -15,7 +15,18 @@ $(document).ready(function() {
 
     function handleData(data){
         if (data.startsWith('200')){
-            data = data.replace('200','');
+            var data = data.replace('200','');
+            var dataList = data.split('\n')
+
+            var id = 'logValDec'
+            if ( $('#iterations').val() == 1 ){
+                id = 'logValNDec'
+            }
+
+            for (liloc in dataList){
+                $('#' + id + liloc).val(dataList[liloc])
+            }
+
             $('#response').val(data)
             clearError()
         } else {
@@ -24,7 +35,7 @@ $(document).ready(function() {
     }
 
     $('#decodeButton').click(function(){
-        data = $('#request').val()
+        data = formatRequest()
         sendData(data)
     });
 

@@ -14,6 +14,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="./js/socket_handler.js"></script>
     <script src="./js/dim_handler.js"></script>
+    <script src="./js/req_formatter.js"></script>
     <link rel="stylesheet" href="./css/style.css"></link>
 </head>
 
@@ -27,10 +28,10 @@
                     <div class="col"></div>
                     <div class="col-4 text-right">Dimensions:
                     </div>
-                    <input type="text" class="form-control dim col-2" id="xdim">
+                    <input type="text" class="form-control dim cell col-2" id="ydim">
                     <div class="col-1 text-center">x
                     </div>
-                    <input type="text" class="form-control dim col-2" id="ydim">
+                    <input type="text" class="form-control dim cell col-2" id="xdim">
                     <div class="col"></div>
                 </div>
                 <div id="parityTable" class="parityTable">
@@ -75,7 +76,7 @@
                 <div class="row">
                     <div class="col-4 text-right">Iterations:
                     </div>
-                    <input type="text" class="form-control dim col" id="">
+                    <input type="text" class="form-control col cell" id="iterations">
                     <div class="col-6"></div>
                 </div>
                 <div class="row">
