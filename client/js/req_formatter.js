@@ -20,7 +20,5 @@ function formatRequest() {
     output += '1' + '\n'
     output += $('#iterations').val()
 
-    console.log(output)
-
     return output
 }

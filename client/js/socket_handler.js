@@ -5,17 +5,20 @@ $(document).ready(function() {
         socket.emit('data', data)
     }
 
+    // sets alert to visible, changes alert text
     function setError(msg){
         $('.alert').css('visibility', 'visible').text(msg)
     }
 
+    // clears out alert
     function clearError(){
         $('.alert').css('visibility', 'hidden')
     }
 
     function handleData(data){
-        if (data.startsWith('200')){
-            var data = data.replace('200','');
+        // check for success
+        if (data.startsWith('200\n')){
+            var data = data.replace('200\n','');
             var dataList = data.split('\n')
 
             var id = 'logValDec'
@@ -29,6 +32,8 @@ $(document).ready(function() {
 
             $('#response').val(data)
             clearError()
+
+        // if not success, must be an error
         } else {
             setError(data)
         }
@@ -40,8 +45,7 @@ $(document).ready(function() {
     });
 
 
-    socket.on('data', function(msg){     
-        console.log(msg)
+    socket.on('data', function(msg){
         handleData(msg)
     });
 });
